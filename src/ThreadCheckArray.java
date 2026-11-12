@@ -1,8 +1,3 @@
-import java.util.ArrayList;
-
-/**
- * This class implements Runnable and checks for a win condition using an ArrayList of integers.
- */
 public class ThreadCheckArray implements Runnable {
     private boolean flag;
     private boolean[] winArray;
@@ -10,11 +5,6 @@ public class ThreadCheckArray implements Runnable {
     ArrayList<Integer> array;
     int b;
 
-    /**
-     * Constructs a new instance of ThreadCheckArray with the given SharedData object.
-     *
-     * @param sd The SharedData object to be used by this class.
-     */
     public ThreadCheckArray(SharedData sd) {
         this.sd = sd;
         synchronized (sd) {
@@ -24,12 +14,6 @@ public class ThreadCheckArray implements Runnable {
         winArray = new boolean[array.size()];
     }
 
-    /**
-     * Recursive helper method to check for a win condition.
-     *
-     * @param n  The current index in the array.
-     * @param b  The remaining value to be matched.
-     */
     void rec(int n, int b) {
         synchronized (sd) {
             if (sd.getFlag()) return;
@@ -51,11 +35,8 @@ public class ThreadCheckArray implements Runnable {
         rec(n-1, b);
     }
 
-    /**
-     * Runs the thread to check for a win condition and update the SharedData object.
-     */
     public void run() {
-        if (array.size() != 1)
+        if (array.length != 1)
             if (Thread.currentThread().getName().equals("thread1"))
                 rec(array.size()-1, b - array.get(array.size() - 1));
             else
