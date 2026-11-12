@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class ThreadCheckArray implements Runnable {
     private boolean flag;
     private boolean[] winArray;
@@ -36,7 +37,7 @@ public class ThreadCheckArray implements Runnable {
     }
 
     public void run() {
-        if (array.length != 1)
+        if (array.size() != 1)
             if (Thread.currentThread().getName().equals("thread1"))
                 rec(array.size()-1, b - array.get(array.size() - 1));
             else
